@@ -47,13 +47,8 @@ const PaperModel= new mongoose.Schema(
             required: true,
         },
         
-        /*pdf: {
-            type: Buffer, 
-            required: true
-        },
-        filename: {
-            type: String, 
-            required: true
+        /*path : {
+            type: String
         }*/
     },
 

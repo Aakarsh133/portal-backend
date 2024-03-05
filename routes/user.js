@@ -5,21 +5,7 @@ const multer= require("multer")
 const fs= require("fs")
 const {index, storage,  upload} = require("../controllers/user")
 
-
-router.get('/', async(req, res) => {
-    
-    try {
-        const entry= await Model.find({})
-        res.status(200).json (entry);
-    }
-
-    catch(error){
-        res.status(500).json({message: error});
-    }
-});
-
-
-router.post('/uploads', async(req, res) => {
+router.post('/uploads', upload.single('pdf'), async(req, res) => {
     try {
 
       const {bt_id, course_code, title, year, exam_type, semester, approved}= req.body;
@@ -31,11 +17,9 @@ router.post('/uploads', async(req, res) => {
 
   }
   catch(error){
-      res.status(500).json({message: error.message});
+      res.status(500).json("err");
   }
 });
-
-
 
 
 module.exports= router;

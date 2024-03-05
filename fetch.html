@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<form id="fetchForm">
+    <label for="criteria">Criteria:</label><br>
+    <input type="text" id="criteria" name="criteria" required><br> <!-- Input field for criteria value -->
+  
+    <input type="submit" value="Fetch Data By Criteria">
+    <button type="button" id="fetchAllButton">Fetch All Data</button> <!-- Button to fetch all data -->
+
+    <button type="button" id="updateApprovalButton">Update Approval</button>
+  </form>
+
+<div id="dataDisplay"></div> 
+
+<script>
+document.getElementById('fetchForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const criteriaValue = document.getElementById('criteria').value;
+
+    try {
+        const response = await fetch(`mod/fetchData?criteria=${criteriaValue}`);
+        const data = await response.json();
+
+        const dataDisplay = document.getElementById('dataDisplay');
+        dataDisplay.innerHTML = JSON.stringify(data, null, 2);
+
+    } catch (error) {
+        console.error(error);
+        alert('Error fetching data');
+    }
+});
+
+document.getElementById('fetchAllButton').addEventListener('click', async function() {
+    try {
+        const response = await fetch('mod/fetchall'); 
+        const data = await response.json();
+
+        const dataDisplay = document.getElementById('dataDisplay');
+        dataDisplay.innerHTML = JSON.stringify(data, null, 2);
+
+    } catch (error) {
+        console.error(error);
+        alert('Error fetching all data.');
+    }
+});
+
+document.getElementById('updateApprovalButton').addEventListener('click', async function() {
+    const criteriaValue = document.getElementById('criteria').value;
+
+    try {
+        const response = await fetch(`mod/fetchData?criteria=${criteriaValue}`);
+        const data = await response.json();
+
+        const updatedData = {
+            approved: false
+        };
+
+        const updateResponse = await fetch(`mod/${data._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (updateResponse.ok) {
+            alert('Approval status updated successfully!');
+        } else {
+            alert('Failed to update approval status.');
+        }
+    } catch (error) {
+        console.error(error);
+        alert('Error updating approval statu.');
+    }
+});
+
+</script>
+
+
+</body>
+</html>
