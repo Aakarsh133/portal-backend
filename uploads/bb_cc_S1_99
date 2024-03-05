@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct doubly{
+    int data,
+    struct doubly *next;
+    struct doubly *prev;
+};
+
+int main(){
+    int i,n,j;
+
+    struct doubly *head, *temp, *nnode;
+    
+    
+}

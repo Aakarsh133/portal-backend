@@ -45,11 +45,12 @@ const PaperModel= new mongoose.Schema(
         approved: {
             type: Boolean,
             required: true,
+            default: false
         },
         
-        /*path : {
+        path : {
             type: String
-        }*/
+        }
     },
 
     {

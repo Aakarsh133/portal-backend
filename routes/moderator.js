@@ -18,7 +18,7 @@ router.get('/fetchData', async (req, res) => {
 
 router.get('/fetchall', async(req, res) => {
     try {
-        const data= await Model.find({});
+        const data= await Model.find(req.body);
         res.json(data)
     }
     catch (err){
