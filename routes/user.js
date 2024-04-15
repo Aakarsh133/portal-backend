@@ -12,11 +12,13 @@ let approved = false
 
 router.post('/uploads', upload.single('pdf'), async (req, res) => {
   try {
-    const { course_code, year, exam_type, semester } = req.body
+    const { department, name, course_code, year, exam_type, semester } = req.body
     const unique_id = bt_id + '_' + year + exam_type + course_code + '_' + index
     const path = req.file.path
 
     const model = new Model({
+      department,
+      name, 
       bt_id,
       unique_id,
       course_code,
