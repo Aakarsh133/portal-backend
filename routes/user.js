@@ -12,18 +12,18 @@ let approved = false
 
 router.post('/uploads', upload.single('pdf'), async (req, res) => {
   try {
-    const { department, name, course_code, year, exam_type, semester } = req.body
-    const unique_id = bt_id + '_' + year + exam_type + course_code + '_' + index
+    const { courseCode, year, examType, semester, contributor} = req.body
+    const unique_id = bt_id + '_' + year + examType + courseCode + '_' + index
     const path = req.file.path
 
     const model = new Model({
-      department,
-      name, 
+      //department,
+      contributor, 
       bt_id,
       unique_id,
-      course_code,
+      courseCode,
       year,
-      exam_type,
+      examType,
       semester,
       approved,
       path
@@ -31,7 +31,7 @@ router.post('/uploads', upload.single('pdf'), async (req, res) => {
     const entry = await Model.create(model)
     res.status(200).json(entry)
   } catch (error) {
-    res.status(500).json('err')
+    res.status(500).json(error)
   }
 })
 

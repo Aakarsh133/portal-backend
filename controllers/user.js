@@ -20,10 +20,10 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueFilename =
-      req.body.course_code +
+      req.body.courseCode +
       req.body.year +
       '_' +
-      req.body.exam_type +
+      req.body.examType +
       '_' +
       index
     cb(null, uniqueFilename)

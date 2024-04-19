@@ -4,10 +4,10 @@ const PaperModel= new mongoose.Schema(
     { 
       department : {
       type: String,
-      required: true
+      required: false
   },  
       
-      name : {
+      contributor : {
         type: String,
         required: true
     },
@@ -22,34 +22,34 @@ const PaperModel= new mongoose.Schema(
             required: true
         },
 
-        File : {
+        pdf : {
             type: String,
             required: false
         },
 
-        course_code : {
+        courseCode : {
             type: String,
             required: true
         },
 
         title: {
             type: String,
-            required: true
+            required: false
         },
 
         year :{
-            type: Number,
+            type: String,
             required: true
         },
 
-        exam_type :{
+        examType :{
             type: String,
             enum: ['S1', 'S2', 'ES'],
             required: true
         },
 
         semester: {
-            type: Number,
+            type: String,
             required: true
         },
 
